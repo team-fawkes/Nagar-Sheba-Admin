@@ -85,6 +85,14 @@ function verifyOTP($phone, $otp , $userID = null)
 
     return false;
 }
+function getSmsBalance(){
+    $provider = getSetting('sms_provider');
+    if($provider == 'bulk_sms_bd'){
+        return get_balance_bulksmsbd();
+    }else{
+        return 'Please Select SMS Provider first!';
+    }
+}
 function bulksmsbd_sms_send($phone_number,$msg) {
 
     $url = "http://bulksmsbd.net/api/smsapi";
