@@ -61,7 +61,8 @@ function generateAndStoreOTP($phone, $otpValidityInMinutes = 10, $userID = null)
 
     // You can also send the OTP to the user's mobile here using an SMS service or any other method.
     // Example: sendSMS($user->phone, "Your OTP is: $otp");
-
+    $message = "নগর সেবা: আপনার ওটিপি নম্বরটি হলো: " . $otp;
+    send_sms($phone,$message,'Authentication');
     return $otp;
 }
 
@@ -118,10 +119,8 @@ function bulksmsbd_sms_send($phone_number,$msg) {
 
     $data = json_decode($response);
     if($data->response_code == 202){
-        toastr()->success($data->success_message,'SMS sent successful');
         return $data->success_message;
     }else{
-        toastr()->error($data->error_message,'SMS sent failed!');
         return $data->error_message;
     }
 }
@@ -160,7 +159,7 @@ function addSMSLog($phone,$sms,$sender,$status,$type)
     SmsLog::create([
         'phone' => $phone,
         'msg' => $sms,
-        'sender_id' => $status,
+        'sender_id' => $sender,
         'status' => $status,
         'type'=>$type,
     ]);
