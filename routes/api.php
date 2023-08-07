@@ -27,6 +27,8 @@ Route::post('me',[\App\Http\Controllers\Api\AuthController::class,'me']);
 Route::post('profile-update',[\App\Http\Controllers\Api\UserController::class,'profile_update']);
 
 Route::get('service-category',[\App\Http\Controllers\Api\ServiceController::class,'service_category']);
+Route::get('complain-counter',[\App\Http\Controllers\Api\ServiceController::class,'complain_counter']);
+Route::post('complain-create',[\App\Http\Controllers\Api\ServiceController::class,'complain_create']);
 
 
 

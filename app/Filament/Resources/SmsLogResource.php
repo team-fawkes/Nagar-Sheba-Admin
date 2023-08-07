@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class SmsLogResource extends Resource
 {
     protected static ?string $model = SmsLog::class;
-
+    protected static ?int $navigationSort = 25;
     protected static ?string $navigationIcon = 'heroicon-o-chat-alt';
 
     public static function form(Form $form): Form

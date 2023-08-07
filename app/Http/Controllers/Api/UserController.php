@@ -55,6 +55,10 @@ class UserController extends Controller
             if($request->longitude){
                 $user->longitude = $request->longitude;
             }
+
+            if ($request->file('image')){
+                $user->image  = $this->storeFile($request->file('image'), 'user/images');
+            }
             $user->update();
             return response()->json([
                 'user' => $user,
@@ -66,5 +70,14 @@ class UserController extends Controller
     public function guard()
     {
         return Auth::guard('api');
+    }
+    private function storeFile($file, $destination)
+    {
+        if ($file) {
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/'.$destination), $fileName);
+            return $destination . '/' . $fileName;
+        }
+        return null;
     }
 }

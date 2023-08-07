@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('password');
+            $table->string('image')->nullable();
             $table->string('language')->default('en');
             $table->string('sound')->default('yes');
             $table->string('notification')->default('yes');

@@ -191,3 +191,9 @@ function get_balance_bulksmsbd() {
     }
 
 }
+function englishToBengaliNumber($number) {
+    $englishDigits = range(0, 9);
+    $bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    $bengaliNumber = str_replace($englishDigits, $bengaliDigits, $number);
+    return $bengaliNumber;
+}

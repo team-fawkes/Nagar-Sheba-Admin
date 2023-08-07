@@ -6,19 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ServiceCategory extends Model
+class ComplainFile extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable = [
-        'title_en',
-        'title_bn',
-        'icon',
-        'color',
-        'order',
+        'complain_id',
+        'file_path',
     ];
 
-    public function complains()
+    public function complain()
     {
-        return $this->hasMany(Complain::class);
+        return $this->belongsTo(Complain::class);
     }
 }

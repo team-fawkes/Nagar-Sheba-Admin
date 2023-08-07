@@ -18,6 +18,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'phone',
         'password',
+        'image',
         'language',
         'sound',
         'notification',
@@ -43,5 +44,9 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public function complains()
+    {
+        return $this->hasMany(Complain::class);
     }
 }

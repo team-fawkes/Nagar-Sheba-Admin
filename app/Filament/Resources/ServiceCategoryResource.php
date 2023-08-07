@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ServiceCategoryResource extends Resource
 {
     protected static ?string $model = ServiceCategory::class;
-
+    protected static ?int $navigationSort = 4;
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
     public static function form(Form $form): Form
@@ -51,6 +51,7 @@ class ServiceCategoryResource extends Resource
                 Tables\Columns\ImageColumn::make('icon'),
                 Tables\Columns\ColorColumn::make('color'),
                 Tables\Columns\TextColumn::make('order'),
+                Tables\Columns\TextColumn::make('complains_count')->counts('complains'),
             ])->defaultSort('order','asc')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -70,7 +71,7 @@ class ServiceCategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ComplainsRelationManager::class,
         ];
     }
 

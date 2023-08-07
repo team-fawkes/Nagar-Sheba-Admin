@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 class AdminResource extends Resource
 {
     protected static ?string $model = Admin::class;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
 
