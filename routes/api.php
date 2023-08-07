@@ -29,6 +29,10 @@ Route::post('profile-update',[\App\Http\Controllers\Api\UserController::class,'p
 Route::get('service-category',[\App\Http\Controllers\Api\ServiceController::class,'service_category']);
 Route::get('complain-counter',[\App\Http\Controllers\Api\ServiceController::class,'complain_counter']);
 Route::post('complain-create',[\App\Http\Controllers\Api\ServiceController::class,'complain_create']);
+Route::get('complains',[\App\Http\Controllers\Api\ServiceController::class,'complains']);
+Route::get('complain/{id}',[\App\Http\Controllers\Api\ServiceController::class,'complain']);
+
+Route::get('bulletins',[\App\Http\Controllers\Api\NoticeController::class,'bulletins']);
 
 
 

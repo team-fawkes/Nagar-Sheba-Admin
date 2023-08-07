@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Complain;
 use App\Models\ServiceCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -13,8 +14,9 @@ class ServiceController extends Controller
 {
     public function service_category(){
         if ($this->guard()->user()){
-            $language = $this->guard()->user()->language;
-            if ($language == 'bn'){
+            $user = User::find($this->guard()->user()->id);
+            $language = $user->language;
+            if ($language == "bn"){
                 $categories = ServiceCategory::orderBy('order','asc')->select('title_bn as title', 'icon', 'color')->get();
             }else{
                 $categories = ServiceCategory::orderBy('order','asc')->select('title_en as title', 'icon', 'color')->get();
@@ -38,8 +40,9 @@ class ServiceController extends Controller
             $solved = Complain::where('status','solved')->count();
             $total = Complain::where('status','total')->count();
 
-            $language = $this->guard()->user()->language;
-            if ($language == 'bn'){
+            $user = User::find($this->guard()->user()->id);
+            $language = $user->language;
+            if ($language == "bn"){
                 return response()->json([
                     'pending' => englishToBengaliNumber($pending),
                     'received' => englishToBengaliNumber($received),
@@ -85,6 +88,7 @@ class ServiceController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'errors' => $validator->errors(),
+                    'status' => false,
                 ], 422);
             }
 
@@ -106,7 +110,38 @@ class ServiceController extends Controller
 
             return response()->json([
                 'message' => 'Complain created successfully',
-                'data' => $complain,
+                'complain' => $complain,
+                'status' => true,
+            ], 201);
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Unauthorized'
+        ], 401);
+    }
+    public function complains(){
+        if ($this->guard()->user()){
+            $complains = Complain::where('user_id',$this->guard()->user()->id)->get();
+            foreach ($complains as $complain){
+                $complain->service_category;
+            }
+            return response()->json([
+                'status' => true,
+                'complains' => $complains,
+            ], 201);
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Unauthorized'
+        ], 401);
+    }
+    public function complain($id){
+        if ($this->guard()->user()){
+            $complain = Complain::find($id);
+            $complain->service_category;
+            return response()->json([
+                'status' => true,
+                'complain' => $complain,
             ], 201);
         }
         return response()->json([
@@ -127,7 +162,6 @@ class ServiceController extends Controller
         }
         return null;
     }
-
     private function storeGalleryFiles($files)
     {
         $uploadedFiles = [];
