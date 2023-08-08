@@ -30,4 +30,3 @@ Route::get('optimize', function (){
 
 Auth::routes();
 
-Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
