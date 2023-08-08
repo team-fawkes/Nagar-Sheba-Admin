@@ -38,5 +38,11 @@ Route::get('notification/{id}',[\App\Http\Controllers\Api\NoticeController::clas
 Route::get('disaster-alerts',[\App\Http\Controllers\Api\NoticeController::class,'disaster_alerts']);
 Route::get('disaster-alert/{id}',[\App\Http\Controllers\Api\NoticeController::class,'disaster_alert']);
 
+Route::get('spectacular-places',[\App\Http\Controllers\Api\NoticeController::class,'spectacular_places']);
+Route::get('spectacular-place/{id}',[\App\Http\Controllers\Api\NoticeController::class,'spectacular_place']);
+
+Route::post('near_locations',[\App\Http\Controllers\Api\NoticeController::class,'near_locations']);
+Route::get('near_location/{id}',[\App\Http\Controllers\Api\NoticeController::class,'near_location']);
+
 
 

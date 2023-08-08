@@ -30,6 +30,9 @@ class Complain extends Model
     ];
 
     protected $dates = ['received_at', 'solved_at', 'observed_at'];
+    protected $casts = [
+        'gallery' => 'array',
+    ];
 
     protected static function booted()
     {
