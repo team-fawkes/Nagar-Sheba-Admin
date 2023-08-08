@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,14 @@ Route::get('/', function () {
 });
 
 Route::get('migrate', function (){
-    Artisan::call('migrate:fresh --seed');
+    Artisan::call('migrate');
     return Artisan::output();
 });
+Route::get('optimize', function (){
+    Artisan::call('optimize');
+    return Artisan::output();
+});
+
+Auth::routes();
+
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
