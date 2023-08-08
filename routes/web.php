@@ -23,6 +23,10 @@ Route::get('migrate', function (){
     Artisan::call('migrate');
     return Artisan::output();
 });
+Route::get('migrate-fresh', function (){
+    Artisan::call('migrate:fresh --seed');
+    return Artisan::output();
+});
 Route::get('optimize', function (){
     Artisan::call('cache:clear');
     print_r(Artisan::output());
