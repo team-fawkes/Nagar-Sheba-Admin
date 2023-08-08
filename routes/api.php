@@ -33,6 +33,10 @@ Route::get('complains',[\App\Http\Controllers\Api\ServiceController::class,'comp
 Route::get('complain/{id}',[\App\Http\Controllers\Api\ServiceController::class,'complain']);
 
 Route::get('bulletins',[\App\Http\Controllers\Api\NoticeController::class,'bulletins']);
+Route::get('notifications',[\App\Http\Controllers\Api\NoticeController::class,'notifications']);
+Route::get('notification/{id}',[\App\Http\Controllers\Api\NoticeController::class,'notification']);
+Route::get('disaster-alerts',[\App\Http\Controllers\Api\NoticeController::class,'disaster_alerts']);
+Route::get('disaster-alert/{id}',[\App\Http\Controllers\Api\NoticeController::class,'disaster_alert']);
 
 
 

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BulletinResource\Pages;
-use App\Filament\Resources\BulletinResource\RelationManagers;
-use App\Models\Bulletin;
+use App\Filament\Resources\NotificationResource\Pages;
+use App\Filament\Resources\NotificationResource\RelationManagers;
+use App\Models\Notification;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,26 +13,32 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BulletinResource extends Resource
+class NotificationResource extends Resource
 {
-    protected static ?string $model = Bulletin::class;
+    protected static ?string $model = Notification::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-lightning-bolt';
+    protected static ?string $navigationIcon = 'heroicon-o-bell';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('headline_bn')->label('Headline')
-                    ->required()->placeholder('Enter headline')
+                Forms\Components\TextInput::make('title_en')->label('Title')
+                    ->required()->placeholder('Enter title')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('headline_en')->label('শিরোনাম')
+                Forms\Components\TextInput::make('title_bn')->label('শিরোনাম')
                     ->required()->placeholder('শিরোনাম লিখুন')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('order')->numeric()->default(1)
-                    ->required(),
-                Forms\Components\TextInput::make('url')
+                Forms\Components\Textarea::make('details_en')->label('Details')
+                    ->required()->placeholder('Enter details')
                     ->maxLength(255),
+                Forms\Components\Textarea::make('details_bn')->label('বিস্তারিত')
+                    ->required()->placeholder('বিস্তারিত লিখুন')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('url')->url()
+                    ->maxLength(255)->placeholder('Enter url'),
+                Forms\Components\TextInput::make('order')->numeric()->default(1)->required(),
+                Forms\Components\FileUpload::make('icon')->image()->maxSize(512),
                 Forms\Components\Toggle::make('status')->default(true)
                     ->required(),
             ]);
@@ -42,14 +48,15 @@ class BulletinResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('headline_bn')->label('Headline'),
-                Tables\Columns\TextColumn::make('headline_en')->label('শিরোনাম'),
+
+                Tables\Columns\TextColumn::make('title_en')->label('Title'),
+                Tables\Columns\TextColumn::make('title_bn')->label('শিরোনাম'),
                 Tables\Columns\TextColumn::make('order'),
-                Tables\Columns\IconColumn::make('status')
-                    ->boolean(),
+                Tables\Columns\IconColumn::make('status')->boolean(),
             ])->defaultSort('order','asc')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('status')->options([true => 'Published', false => 'In Active'])
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -73,9 +80,9 @@ class BulletinResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBulletins::route('/'),
-            'create' => Pages\CreateBulletin::route('/create'),
-            'edit' => Pages\EditBulletin::route('/{record}/edit'),
+            'index' => Pages\ListNotifications::route('/'),
+            'create' => Pages\CreateNotification::route('/create'),
+            'edit' => Pages\EditNotification::route('/{record}/edit'),
         ];
     }
 
