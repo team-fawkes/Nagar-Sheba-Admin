@@ -30,8 +30,8 @@ Route::get('optimize', function (){
     print_r(Artisan::output());
     Artisan::call('route:cache');
     print_r(Artisan::output());
-    
+
 });
 
-//Auth::routes();
+Auth::routes();
 
