@@ -24,8 +24,13 @@ Route::get('migrate', function (){
     return Artisan::output();
 });
 Route::get('optimize', function (){
-    Artisan::call('optimize');
-    return Artisan::output();
+    Artisan::call('cache:clear');
+    print_r(Artisan::output());
+    Artisan::call('config:cache');
+    print_r(Artisan::output());
+    Artisan::call('route:cache');
+    print_r(Artisan::output());
+    
 });
 
 //Auth::routes();
