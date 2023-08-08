@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +28,5 @@ Route::get('optimize', function (){
     return Artisan::output();
 });
 
-Auth::routes();
+//Auth::routes();
 
