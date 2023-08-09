@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class DisasterAlertResource extends Resource
 {
     protected static ?string $model = DisasterAlert::class;
-
+    protected static ?string $navigationGroup = 'Alert & Notice';
+    protected static ?int $navigationSort = 3;
     protected static ?string $navigationIcon = 'heroicon-o-shield-exclamation';
 
     public static function form(Form $form): Form

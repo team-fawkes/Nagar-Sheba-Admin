@@ -44,5 +44,17 @@ Route::get('spectacular-place/{id}',[\App\Http\Controllers\Api\NoticeController:
 Route::post('near_locations',[\App\Http\Controllers\Api\NoticeController::class,'near_locations']);
 Route::get('near_location/{id}',[\App\Http\Controllers\Api\NoticeController::class,'near_location']);
 
+Route::get('zones',[\App\Http\Controllers\Api\CouncilorController::class,'zones']);
+Route::get('zone/{id}',[\App\Http\Controllers\Api\CouncilorController::class,'zone']);
+Route::get('zone/{id}/councilors',[\App\Http\Controllers\Api\CouncilorController::class,'zone_councilors']);
+
+Route::get('wards',[\App\Http\Controllers\Api\CouncilorController::class,'wards']);
+Route::get('ward/{id}',[\App\Http\Controllers\Api\CouncilorController::class,'ward']);
+
+Route::get('councilors',[\App\Http\Controllers\Api\CouncilorController::class,'councilors']);
+Route::get('councilor/{id}',[\App\Http\Controllers\Api\CouncilorController::class,'councilor']);
+
+
+
 
 

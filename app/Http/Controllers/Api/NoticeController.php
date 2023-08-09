@@ -22,9 +22,9 @@ class NoticeController extends Controller
             $user = User::find($this->guard()->user()->id);
             $language = $user->language;
             if ($language == "bn"){
-                $bulletins = Bulletin::where('status',true)->orderBy('order','asc')->select('headline_bn as headline', 'url','created_at')->get();
+                $bulletins = Bulletin::where('status',true)->orderBy('order','asc')->select('id','headline_bn as headline', 'url','created_at')->get();
             }else{
-                $bulletins = Bulletin::where('status',true)->orderBy('order','asc')->select('headline_en as headline', 'url','created_at')->get();
+                $bulletins = Bulletin::where('status',true)->orderBy('order','asc')->select('id','headline_en as headline', 'url','created_at')->get();
             }
 
             return response()->json([
@@ -44,10 +44,10 @@ class NoticeController extends Controller
             $language = $user->language;
             if ($language == "bn"){
                 $notifications = Notification::where('status',true)->orderBy('order','asc')
-                    ->select('title_bn as title', 'details_bn as details','icon','url','created_at')->get();
+                    ->select('id','title_bn as title', 'details_bn as details','icon','url','created_at')->get();
             }else{
                 $notifications = Notification::where('status',true)->orderBy('order','asc')
-                    ->select('title_en as title', 'details_en as details','icon','url','created_at')->get();
+                    ->select('id','title_en as title', 'details_en as details','icon','url','created_at')->get();
             }
 
             return response()->json([
@@ -66,10 +66,10 @@ class NoticeController extends Controller
             $language = $user->language;
             if ($language == "bn"){
                 $notification = Notification::where('status',true)->orderBy('order','asc')->where('id',$id)
-                    ->select('title_bn as title', 'details_bn as details','icon','url','created_at')->first();
+                    ->select('id','title_bn as title', 'details_bn as details','icon','url','created_at')->first();
             }else{
                 $notification = Notification::where('status',true)->orderBy('order','asc')->where('id',$id)
-                    ->select('title_en as title', 'details_en as details','icon','url','created_at')->first();
+                    ->select('id','title_en as title', 'details_en as details','icon','url','created_at')->first();
             }
 
             return response()->json([
@@ -89,10 +89,10 @@ class NoticeController extends Controller
             $language = $user->language;
             if ($language == "bn"){
                 $notifications = DisasterAlert::where('status',true)->orderBy('order','asc')
-                    ->select('title_bn as title', 'details_bn as details','image','url','file','created_at')->get();
+                    ->select('id','title_bn as title', 'details_bn as details','image','url','file','created_at')->get();
             }else{
                 $notifications = DisasterAlert::where('status',true)->orderBy('order','asc')
-                    ->select('title_en as title', 'details_en as details','image','url','file','created_at')->get();
+                    ->select('id','title_en as title', 'details_en as details','image','url','file','created_at')->get();
             }
 
             return response()->json([
@@ -111,10 +111,10 @@ class NoticeController extends Controller
             $language = $user->language;
             if ($language == "bn"){
                 $notification = DisasterAlert::where('status',true)->orderBy('order','asc')->where('id',$id)
-                    ->select('title_bn as title', 'details_bn as details','image','url','file','created_at')->first();
+                    ->select('id','title_bn as title', 'details_bn as details','image','url','file','created_at')->first();
             }else{
                 $notification = DisasterAlert::where('status',true)->orderBy('order','asc')->where('id',$id)
-                    ->select('title_en as title', 'details_en as details','image','url','file','created_at')->first();
+                    ->select('id','title_en as title', 'details_en as details','image','url','file','created_at')->first();
             }
 
             return response()->json([
@@ -133,9 +133,9 @@ class NoticeController extends Controller
             $user = User::find($this->guard()->user()->id);
             $language = $user->language;
             if ($language == "bn"){
-                $spectacular_places = SpectacularPlace::select('name_bn as name', 'details_bn as details','thumbnail','gallery','latitude','longitude','established_at')->get();
+                $spectacular_places = SpectacularPlace::select('id','name_bn as name', 'details_bn as details','thumbnail','gallery','latitude','longitude','established_at')->get();
             }else{
-                $spectacular_places = SpectacularPlace::select('name_en as name', 'details_en as details','thumbnail','gallery','latitude','longitude','established_at')->get();
+                $spectacular_places = SpectacularPlace::select('id','name_en as name', 'details_en as details','thumbnail','gallery','latitude','longitude','established_at')->get();
             }
 
             return response()->json([
@@ -154,9 +154,9 @@ class NoticeController extends Controller
             $user = User::find($this->guard()->user()->id);
             $language = $user->language;
             if ($language == "bn"){
-                $spectacular_place = SpectacularPlace::where('id',$id)->select('name_bn as name', 'details_bn as details','thumbnail','gallery','latitude','longitude','established_at')->get();
+                $spectacular_place = SpectacularPlace::where('id',$id)->select('id','name_bn as name', 'details_bn as details','thumbnail','gallery','latitude','longitude','established_at')->get();
             }else{
-                $spectacular_place = SpectacularPlace::where('id',$id)->select('name_en as name', 'details_en as details','thumbnail','gallery','latitude','longitude','established_at')->get();
+                $spectacular_place = SpectacularPlace::where('id',$id)->select('id','name_en as name', 'details_en as details','thumbnail','gallery','latitude','longitude','established_at')->get();
             }
 
             return response()->json([
@@ -185,9 +185,9 @@ class NoticeController extends Controller
             $user = User::find($this->guard()->user()->id);
             $language = $user->language;
             if ($language == "bn"){
-                $near_locations = NearLocation::where('type',$request->type)->select('name_bn as name', 'details_bn as details','thumbnail','gallery','latitude','longitude','type')->get();
+                $near_locations = NearLocation::where('type',$request->type)->select('id','name_bn as name', 'details_bn as details','thumbnail','gallery','latitude','longitude','type')->get();
             }else{
-                $near_locations = NearLocation::where('type',$request->type)->select('name_en as name', 'details_en as details','thumbnail','gallery','latitude','longitude','type')->get();
+                $near_locations = NearLocation::where('type',$request->type)->select('id','name_en as name', 'details_en as details','thumbnail','gallery','latitude','longitude','type')->get();
             }
 
             return response()->json([
@@ -205,9 +205,9 @@ class NoticeController extends Controller
             $user = User::find($this->guard()->user()->id);
             $language = $user->language;
             if ($language == "bn"){
-                $near_location = NearLocation::where('id',$id)->select('name_bn as name', 'details_bn as details','thumbnail','gallery','latitude','longitude','type')->first();
+                $near_location = NearLocation::where('id',$id)->select('id','name_bn as name', 'details_bn as details','thumbnail','gallery','latitude','longitude','type')->first();
             }else{
-                $near_location = NearLocation::where('id',$id)->select('name_en as name', 'details_en as details','thumbnail','gallery','latitude','longitude','type')->first();
+                $near_location = NearLocation::where('id',$id)->select('id','name_en as name', 'details_en as details','thumbnail','gallery','latitude','longitude','type')->first();
             }
 
             return response()->json([

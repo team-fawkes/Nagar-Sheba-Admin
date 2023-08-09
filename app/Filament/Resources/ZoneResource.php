@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ComplainFileResource\Pages;
-use App\Filament\Resources\ComplainFileResource\RelationManagers;
-use App\Models\ComplainFile;
+use App\Filament\Resources\ZoneResource\Pages;
+use App\Filament\Resources\ZoneResource\RelationManagers;
+use App\Models\Zone;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,20 +13,23 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ComplainFileResource extends Resource
+class ZoneResource extends Resource
 {
-    protected static ?string $model = ComplainFile::class;
-    protected static ?string $navigationGroup = 'Raise Issue';
-    protected static ?int $navigationSort = 3;
-    protected static ?string $navigationIcon = 'heroicon-o-photograph';
+    protected static ?string $model = Zone::class;
+    protected static ?string $navigationGroup = 'Zone, Ward & Councilors';
+    protected static ?int $navigationSort = 1;
+    protected static ?string $navigationIcon = 'heroicon-o-folder-open';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('complain_id')
-                    ->relationship('complain', 'title')->required(),
-                Forms\Components\FileUpload::make('file_path')->required(),
+                Forms\Components\TextInput::make('name_en')->label('Zone name')
+                    ->required()->placeholder('Enter zone name')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('name_bn')->label('জোনের নাম')
+                    ->required()->placeholder('জোনের নাম লিখুন')
+                    ->maxLength(255),
             ]);
     }
 
@@ -34,8 +37,9 @@ class ComplainFileResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('complain.title'),
-                Tables\Columns\ImageColumn::make('file_path'),
+                Tables\Columns\TextColumn::make('name_en')->label('Zone name'),
+                Tables\Columns\TextColumn::make('name_bn')->label('জোনের নাম'),
+                Tables\Columns\TextColumn::make('wards_count')->counts('wards')->label('Total Wards'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -55,16 +59,16 @@ class ComplainFileResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\WardsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListComplainFiles::route('/'),
-            'create' => Pages\CreateComplainFile::route('/create'),
-            'edit' => Pages\EditComplainFile::route('/{record}/edit'),
+            'index' => Pages\ListZones::route('/'),
+            'create' => Pages\CreateZone::route('/create'),
+            'edit' => Pages\EditZone::route('/{record}/edit'),
         ];
     }
 

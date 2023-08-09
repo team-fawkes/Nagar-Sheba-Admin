@@ -11,6 +11,8 @@ class Profile extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-user';
     protected static string $view = 'filament.forms';
+    protected static ?string $navigationGroup = 'Profile & Users';
+    protected static ?int $navigationSort = 1;
     public $name;
 
     public $email;

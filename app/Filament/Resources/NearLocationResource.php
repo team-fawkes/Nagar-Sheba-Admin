@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class NearLocationResource extends Resource
 {
     protected static ?string $model = NearLocation::class;
-
+    protected static ?string $navigationGroup = 'Locations & Place';
+    protected static ?int $navigationSort = 1;
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
     public static function form(Form $form): Form

@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class SpectacularPlaceResource extends Resource
 {
     protected static ?string $model = SpectacularPlace::class;
-
+    protected static ?string $navigationGroup = 'Locations & Place';
+    protected static ?int $navigationSort = 3;
     protected static ?string $navigationIcon = 'heroicon-o-location-marker';
 
     public static function form(Form $form): Form

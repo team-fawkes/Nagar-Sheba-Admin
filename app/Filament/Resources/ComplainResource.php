@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ComplainResource extends Resource
 {
     protected static ?string $model = Complain::class;
-    protected static ?int $navigationSort = 5;
+    protected static ?string $navigationGroup = 'Raise Issue';
+    protected static ?int $navigationSort = 2;
     protected static ?string $navigationIcon = 'heroicon-o-exclamation';
 
     public static function form(Form $form): Form

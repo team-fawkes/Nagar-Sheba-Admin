@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ServiceCategoryResource extends Resource
 {
     protected static ?string $model = ServiceCategory::class;
-    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup = 'Raise Issue';
+    protected static ?int $navigationSort = 1;
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
     public static function form(Form $form): Form
