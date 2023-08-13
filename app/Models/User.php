@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -15,14 +16,19 @@ class User extends Authenticatable implements JWTSubject
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable = [
+        'unique_id',
         'name',
         'phone',
         'password',
+        'dob',
+        'gender',
         'image',
         'language',
         'sound',
         'notification',
         'status',
+        'emergency_person_name',
+        'emergency_person_contact',
     ];
 
 
@@ -35,6 +41,16 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'password' => 'hashed',
     ];
+    protected static function booted()
+    {
+        static::creating(function ($complain) {
+            do {
+                $complainId = 'UID' . strtoupper(Str::random(5));
+            } while (static::where('unique_id', $complainId)->exists());
+
+            $complain->complain_id = $complainId;
+        });
+    }
 
     public function getJWTIdentifier()
     {

@@ -55,6 +55,18 @@ class UserController extends Controller
             if($request->longitude){
                 $user->longitude = $request->longitude;
             }
+            if($request->gender){
+                $user->gender = $request->gender;
+            }
+            if($request->dob){
+                $user->dob = $request->dob;
+            }
+            if($request->emergency_person_name){
+                $user->emergency_person_name = $request->emergency_person_name;
+            }
+            if($request->emergency_person_contact){
+                $user->emergency_person_contact = $request->emergency_person_contact;
+            }
 
             if ($request->file('image')){
                 $user->image  = $this->storeFile($request->file('image'), 'user/images');

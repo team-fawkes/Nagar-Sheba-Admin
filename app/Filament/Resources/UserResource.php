@@ -28,6 +28,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                TextInput::make('unique_id')->label('User ID')->visibleOn('view'),
                 Forms\Components\TextInput::make('name')->required()->placeholder('Enter Full Name')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')->placeholder('Enter valid phone number')
@@ -44,11 +45,15 @@ class UserResource extends Resource
                         $user = User::find($form->getColumns());
                         return $user ? $user->password : null;
                     })->visibleOn('create')->required(),
+                Forms\Components\Select::make('gender')->options(['male'=>'Male','female'=>'Female','other'=>'Other'])->required(),
+                Forms\Components\DatePicker::make('dob')->label('Date of birth')->placeholder('Select date of birth'),
                 Forms\Components\Select::make('language')->options(['en'=>'English','bn'=>'Bangla'])->required(),
                 Forms\Components\TextInput::make('latitude')->maxLength(255)->placeholder('Enter latitude'),
                 Forms\Components\TextInput::make('longitude')->maxLength(255)->placeholder('Enter longitude'),
                 Forms\Components\Select::make('sound')->required()->options(['yes'=>'Yes','no'=>'No']),
                 Forms\Components\Select::make('notification')->required()->options(['yes'=>'Yes','no'=>'No']),
+                Forms\Components\TextInput::make('emergency_person_name')->label('Emergency person name')->placeholder('Enter emergency person name'),
+                Forms\Components\TextInput::make('emergency_person_contact')->label('Emergency person phone')->placeholder('Enter emergency person phone')->tel(),
                 Forms\Components\Toggle::make('status')
                     ->required(),
 

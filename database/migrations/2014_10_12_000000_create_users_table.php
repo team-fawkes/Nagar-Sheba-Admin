@@ -13,6 +13,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone')->unique();
+            $table->string('unique_id')->unique();
+            $table->string('gender')->nullable();
+            $table->dateTime('dob')->nullable();
             $table->string('password');
             $table->string('image')->nullable();
             $table->string('language')->default('en');
@@ -21,6 +24,8 @@ return new class extends Migration
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->boolean('status')->default(true);
+            $table->string('emergency_person_name')->nullable();
+            $table->string('emergency_person_contact')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
