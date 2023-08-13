@@ -48,7 +48,7 @@ function setSettingDetails($key,$details)
 }
 function generateAndStoreOTP($phone, $otpValidityInMinutes = 10, $userID = null)
 {
-    $otp = mt_rand(100000, 999999);
+    $otp = mt_rand(1000, 9999);
     $expiresAt = Carbon::now()->addMinutes($otpValidityInMinutes);
     $oldOTP = OTP::where('user_id',$userID)->where('phone',$phone)->first();
     if($oldOTP){$oldOTP->delete();}
