@@ -57,6 +57,8 @@ Route::get('ward/{id}',[\App\Http\Controllers\Api\CouncilorController::class,'wa
 Route::get('councilors',[\App\Http\Controllers\Api\CouncilorController::class,'councilors']);
 Route::get('councilor/{id}',[\App\Http\Controllers\Api\CouncilorController::class,'councilor']);
 
+Route::get('forms',[\App\Http\Controllers\Api\GlobalController::class,'forms']);
+Route::get('form/{id}',[\App\Http\Controllers\Api\GlobalController::class,'form']);
 
 
 

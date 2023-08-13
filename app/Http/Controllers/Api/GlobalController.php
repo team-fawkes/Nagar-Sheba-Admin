@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Form;
 use App\Models\User;
-use Illuminate\Http\Request;
+
 
 class GlobalController extends Controller
 {
@@ -56,6 +57,46 @@ class GlobalController extends Controller
                     'ceo_details' => getSettingDetails('ceo_details_en'),
                 ], 201);
             }
+
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Unauthorized'
+        ], 401);
+    }
+    public function forms(){
+        if ($this->guard()->user()){
+            $user = User::find($this->guard()->user()->id);
+            $language = $user->language;
+            if ($language == "bn"){
+                $forms = Form::select('id','name_bn as name', 'url')->get();
+            }else{
+                $forms = Form::select('id','name_en as name', 'url')->get();
+            }
+            return response()->json([
+                'status' => true,
+                'forms' => $forms,
+            ], 201);
+
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Unauthorized'
+        ], 401);
+    }
+    public function form($id){
+        if ($this->guard()->user()){
+            $user = User::find($this->guard()->user()->id);
+            $language = $user->language;
+            if ($language == "bn"){
+                $form = Form::select('id','name_bn as name','url')->where('id',$id)->first();
+            }else{
+                $form = Form::select('id','name_en as name','url')->where('id',$id)->first();
+            }
+            return response()->json([
+                'status' => true,
+                'form' => $form,
+            ], 201);
 
         }
         return response()->json([
