@@ -43,12 +43,12 @@ class User extends Authenticatable implements JWTSubject
     ];
     protected static function booted()
     {
-        static::creating(function ($complain) {
+        static::creating(function ($user) {
             do {
-                $complainId = 'UID' . strtoupper(Str::random(5));
-            } while (static::where('unique_id', $complainId)->exists());
+                $uniqueId = 'UID' . strtoupper(Str::random(5));
+            } while (static::where('unique_id', $uniqueId)->exists());
 
-            $complain->complain_id = $complainId;
+            $user->unique_id = $uniqueId;
         });
     }
 
