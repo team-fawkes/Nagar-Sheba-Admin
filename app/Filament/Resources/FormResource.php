@@ -18,7 +18,8 @@ class FormResource extends Resource
     protected static ?string $model = FromList::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
-    protected static ?string $navigationGroup = 'Others';
+    protected static ?string $navigationGroup = 'DSCC';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

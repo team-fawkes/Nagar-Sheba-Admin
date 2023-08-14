@@ -60,9 +60,10 @@ Route::get('councilor/{id}',[\App\Http\Controllers\Api\CouncilorController::clas
 Route::get('forms',[\App\Http\Controllers\Api\GlobalController::class,'forms']);
 Route::get('form/{id}',[\App\Http\Controllers\Api\GlobalController::class,'form']);
 
-Route::get('dept-heads',[\App\Http\Controllers\Api\GlobalController::class,'dept_heads']);
-Route::get('dept-head/{id}',[\App\Http\Controllers\Api\GlobalController::class,'dept_head']);
+Route::get('department-heads',[\App\Http\Controllers\Api\GlobalController::class,'dept_heads']);
+Route::get('department-head/{id}',[\App\Http\Controllers\Api\GlobalController::class,'dept_head']);
 
-
+Route::get('offices',[\App\Http\Controllers\Api\GlobalController::class,'offices']);
+Route::get('office/{id}',[\App\Http\Controllers\Api\GlobalController::class,'office']);
 
 

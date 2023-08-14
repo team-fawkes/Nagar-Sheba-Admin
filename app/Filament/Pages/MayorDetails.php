@@ -12,7 +12,8 @@ use Filament\Pages\Page;
 class MayorDetails extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
+    protected static ?string $navigationGroup = 'DSCC';
+    protected static ?int $navigationSort = 1;
     protected static string $view = 'filament.forms';
 
     protected function getBreadcrumbs(): array

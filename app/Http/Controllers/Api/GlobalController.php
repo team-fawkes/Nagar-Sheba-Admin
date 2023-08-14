@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\DepartmentHead;
 use App\Models\Form;
+use App\Models\Office;
 use App\Models\User;
 
 
@@ -137,6 +138,46 @@ class GlobalController extends Controller
             return response()->json([
                 'status' => true,
                 'department_head' => $head,
+            ], 201);
+
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Unauthorized'
+        ], 401);
+    }
+    public function offices(){
+        if ($this->guard()->user()){
+            $user = User::find($this->guard()->user()->id);
+            $language = $user->language;
+            if ($language == "bn"){
+                $offices = Office::select('id','name_bn as name','address_bn as address','phone','latitude','longitude')->get();
+            }else{
+                $offices = Office::select('id','name_en as name','address_en as address','phone','latitude','longitude')->get();
+            }
+            return response()->json([
+                'status' => true,
+                'offices' => $offices,
+            ], 201);
+
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Unauthorized'
+        ], 401);
+    }
+    public function office($id){
+        if ($this->guard()->user()){
+            $user = User::find($this->guard()->user()->id);
+            $language = $user->language;
+            if ($language == "bn"){
+                $office = Office::select('id','name_bn as name','address_bn as address','phone','latitude','longitude')->where('id',$id)->first();
+            }else{
+                $office = Office::select('id','name_en as name','address_en as address','phone','latitude','longitude')->where('id',$id)->first();
+            }
+            return response()->json([
+                'status' => true,
+                'office' => $office,
             ], 201);
 
         }

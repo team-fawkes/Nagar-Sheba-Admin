@@ -18,6 +18,8 @@ class DepartmentHeadResource extends Resource
     protected static ?string $model = DepartmentHead::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-view-list';
+    protected static ?string $navigationGroup = 'DSCC';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -41,7 +43,7 @@ class DepartmentHeadResource extends Resource
                 Forms\Components\TextInput::make('phone')->placeholder('Enter dept. head phone number')
                     ->tel()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('image')->placeholder('Select the image'),
+                Forms\Components\FileUpload::make('image'),
             ]);
     }
 
