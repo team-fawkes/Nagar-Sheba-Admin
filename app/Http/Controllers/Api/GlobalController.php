@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\DepartmentHead;
 use App\Models\Form;
 use App\Models\User;
 
@@ -96,6 +97,46 @@ class GlobalController extends Controller
             return response()->json([
                 'status' => true,
                 'form' => $form,
+            ], 201);
+
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Unauthorized'
+        ], 401);
+    }
+    public function dept_heads(){
+        if ($this->guard()->user()){
+            $user = User::find($this->guard()->user()->id);
+            $language = $user->language;
+            if ($language == "bn"){
+                $heads = DepartmentHead::select('id','name_bn as name', 'title_bn as title','image','address_bn as address','phone')->get();
+            }else{
+                $heads = DepartmentHead::select('id','name_en as name', 'title_en as title','image','address_en as address','phone')->get();
+            }
+            return response()->json([
+                'status' => true,
+                'department_heads' => $heads,
+            ], 201);
+
+        }
+        return response()->json([
+            'status' => false,
+            'error' => 'Unauthorized'
+        ], 401);
+    }
+    public function dept_head($id){
+        if ($this->guard()->user()){
+            $user = User::find($this->guard()->user()->id);
+            $language = $user->language;
+            if ($language == "bn"){
+                $head = DepartmentHead::select('id','name_bn as name', 'title_bn as title','image','address_bn as address','phone')->where('id',$id)->first();
+            }else{
+                $head = DepartmentHead::select('id','name_en as name', 'title_en as title','image','address_en as address','phone')->where('id',$id)->first();
+            }
+            return response()->json([
+                'status' => true,
+                'department_head' => $head,
             ], 201);
 
         }
