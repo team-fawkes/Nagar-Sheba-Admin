@@ -17,9 +17,9 @@ class ServiceController extends Controller
             $user = User::find($this->guard()->user()->id);
             $language = $user->language;
             if ($language == "bn"){
-                $categories = ServiceCategory::orderBy('order','asc')->select('title_bn as title', 'icon', 'color')->get();
+                $categories = ServiceCategory::orderBy('order','asc')->select('id','title_bn as title', 'icon', 'color')->get();
             }else{
-                $categories = ServiceCategory::orderBy('order','asc')->select('title_en as title', 'icon', 'color')->get();
+                $categories = ServiceCategory::orderBy('order','asc')->select('id','title_en as title', 'icon', 'color')->get();
             }
 
             return response()->json([
@@ -93,12 +93,12 @@ class ServiceController extends Controller
             }
 
             $complain = new Complain([
-                'service_category_id' => $request->input('service_category_id'),
+                'service_category_id' => intval($request->input('service_category_id')) ,
                 'user_id' => $this->guard()->user()->id,
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
-                'latitude' => $request->input('latitude'),
-                'longitude' => $request->input('longitude'),
+                'latitude' =>  floatval($request->input('latitude')),
+                'longitude' => floatval($request->input('longitude')),
                 'picture' => $this->storeFile($request->file('picture'), 'complain/images'),
                 'voice' => $this->storeFile($request->file('voice'), 'complain/voices'),
                 'video' => $this->storeFile($request->file('video'), 'complain/videos'),
