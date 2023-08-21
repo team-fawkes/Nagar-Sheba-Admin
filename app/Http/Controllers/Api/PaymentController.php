@@ -184,7 +184,6 @@ class PaymentController extends Controller
         if ($this->guard()->user()){
             $user = User::find($this->guard()->user()->id);
             $invoice = Invoice::where('invid',$invid)->first();
-            $user = $invoice->user;
             $bill = $invoice->bill;
 
             return response()->json([
