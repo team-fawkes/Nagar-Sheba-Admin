@@ -44,9 +44,9 @@ class BillResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('bill_category.name_en'),
-                Tables\Columns\TextColumn::make('name_en')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('icon'),
-                Tables\Columns\TextColumn::make('color'),
+                Tables\Columns\TextColumn::make('name_en')->searchable()->sortable()->label('Name'),
+                Tables\Columns\ImageColumn::make('icon'),
+                Tables\Columns\ColorColumn::make('color'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

@@ -39,9 +39,9 @@ class BillCategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name_en')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('icon'),
-                Tables\Columns\TextColumn::make('color'),
+                Tables\Columns\TextColumn::make('name_en')->searchable()->sortable()->label('Name'),
+                Tables\Columns\ImageColumn::make('icon'),
+                Tables\Columns\ColorColumn::make('color'),
 
             ])
             ->filters([
