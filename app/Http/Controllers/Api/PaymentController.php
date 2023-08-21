@@ -151,7 +151,7 @@ class PaymentController extends Controller
             ]);
             return response()->json([
                 'status' => true,
-                'base_url' => env('APP_URL'),
+                'pay_url' => env('APP_URL').'/pay-invoice/',
                 'invoice' => $invoice
             ], 401);
         }
@@ -170,7 +170,7 @@ class PaymentController extends Controller
             }
             return response()->json([
                 'status' => true,
-                'base_url' => env('APP_URL'),
+                'pay_url' => env('APP_URL').'/pay-invoice/',
                 'bills' => $invoices,
             ], 201);
 
@@ -189,7 +189,7 @@ class PaymentController extends Controller
             }
             return response()->json([
                 'status' => true,
-                'base_url' => env('APP_URL'),
+                'pay_url' => env('APP_URL').'/pay-invoice/',
                 'bills' => $invoice,
             ], 201);
 

@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('pay-invoice/{invid}',[\App\Http\Controllers\PayController::class,'payment']);
+
 Route::get('migrate', function (){
     Artisan::call('migrate');
     return Artisan::output();
