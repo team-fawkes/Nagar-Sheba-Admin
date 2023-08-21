@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function profile_update(Request $request){
         if ($this->guard()->user()){
-            $user = User::find($this->guard()->user()->id)->first();
+            $user = User::where('id',$this->guard()->user()->id)->first();
             if($request->name){
                 $user->name = $request->name;
             }
