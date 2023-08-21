@@ -30,7 +30,7 @@ class BillCategoryResource extends Resource
                 Forms\Components\TextInput::make('name_bn')->label('বিল ক্যাটাগরি নাম')->label(' বিল ক্যাটাগরি নাম লিখুন')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('icon')->required(),
+                Forms\Components\FileUpload::make('icon')->required()->image(),
                 Forms\Components\ColorPicker::make('color')->required(),
             ]);
     }

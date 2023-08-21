@@ -34,7 +34,7 @@ class BillResource extends Resource
                 Forms\Components\TextInput::make('name_bn')->label('বিল নাম')->label(' বিল নাম লিখুন')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('icon')->required(),
+                Forms\Components\FileUpload::make('icon')->required()->image(),
                 Forms\Components\ColorPicker::make('color')->required(),
             ]);
     }
