@@ -66,4 +66,10 @@ Route::get('department-head/{id}',[\App\Http\Controllers\Api\GlobalController::c
 Route::get('offices',[\App\Http\Controllers\Api\GlobalController::class,'offices']);
 Route::get('office/{id}',[\App\Http\Controllers\Api\GlobalController::class,'office']);
 
+//payment
+Route::get('bill-categories',[\App\Http\Controllers\Api\PaymentController::class,'bill_categories']);
+Route::get('bill-category/{id}',[\App\Http\Controllers\Api\PaymentController::class,'bill_category']);
+
+Route::get('bills',[\App\Http\Controllers\Api\PaymentController::class,'bills']);
+Route::get('bill/{id}',[\App\Http\Controllers\Api\PaymentController::class,'bill']);
 

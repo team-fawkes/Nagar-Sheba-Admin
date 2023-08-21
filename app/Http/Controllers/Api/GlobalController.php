@@ -7,6 +7,7 @@ use App\Models\DepartmentHead;
 use App\Models\Form;
 use App\Models\Office;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class GlobalController extends Controller
@@ -185,5 +186,9 @@ class GlobalController extends Controller
             'status' => false,
             'error' => 'Unauthorized'
         ], 401);
+    }
+    public function guard()
+    {
+        return Auth::guard('api');
     }
 }
