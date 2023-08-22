@@ -37,7 +37,7 @@ class ComplainResource extends Resource
                 Forms\Components\FileUpload::make('video'),
                 Forms\Components\FileUpload::make('gallery')->image(),
                 Forms\Components\Select::make('status')
-                    ->required()->options(['pending'=>'Pending','received'=>'Received','progress'=>'In Progress','solved','Solved']),
+                    ->required()->options(['pending'=>'Pending','received'=>'Received','progress'=>'In Progress','solved'=>'Solved']),
                 Forms\Components\DateTimePicker::make('received_at')->placeholder('Select Date and Time'),
                 Forms\Components\DateTimePicker::make('solved_at')->placeholder('Select Date and Time'),
                 Forms\Components\DateTimePicker::make('observed_at')->placeholder('Select Date and Time'),
