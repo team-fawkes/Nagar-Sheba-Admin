@@ -28,15 +28,16 @@ class InvoiceResource extends Resource
                     ->relationship('user', 'name')
                     ->required(),
                 Forms\Components\Select::make('bill_id')
-                    ->relationship('bill', 'id')
+                    ->relationship('bill', 'name_en')
                     ->required(),
                 Forms\Components\TextInput::make('invid')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('amount'),
-                Forms\Components\TextInput::make('trxid')
+                Forms\Components\TextInput::make('trxid')->visibleOn('view')
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('billing_period'),
+                Forms\Components\Select::make('status')->options(['pending'=>'Pending','failed'=>'Failed','canceled'=>'Canceled','success'=>'Success']),
             ]);
     }
 
@@ -45,24 +46,22 @@ class InvoiceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('bill.id'),
-                Tables\Columns\TextColumn::make('invid'),
+                Tables\Columns\TextColumn::make('bill.name_en')->sortable(),
+                Tables\Columns\TextColumn::make('invid')->sortable(),
                 Tables\Columns\TextColumn::make('amount'),
                 Tables\Columns\TextColumn::make('trxid'),
                 Tables\Columns\TextColumn::make('billing_period')
                     ->date(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
+                Tables\Columns\BadgeColumn::make('status')->sortable()
+
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

@@ -21,6 +21,11 @@ Route::get('/', function () {
 
 Route::get('pay-invoice/{invid}',[\App\Http\Controllers\PayController::class,'payment']);
 
+//You need declear your success & fail route in "app\Middleware\VerifyCsrfToken.php"
+Route::post('pay/success',[\App\Http\Controllers\PayController::class,'success'])->name('pay.success');
+Route::post('pay/fail',[\App\Http\Controllers\PayController::class,'fail'])->name('pay.fail');
+Route::get('pay/cancel',[\App\Http\Controllers\PayController::class,'cancel'])->name('pay.cancel');
+
 Route::get('migrate', function (){
     Artisan::call('migrate');
     return Artisan::output();
