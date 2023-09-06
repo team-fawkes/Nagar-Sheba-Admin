@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes,HasFilamentShield;
 
     protected $fillable = [
         'name',
