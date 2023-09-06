@@ -201,22 +201,13 @@ class RoleResource extends Resource implements HasShieldPermissions
         return Utils::isResourceNavigationRegistered();
     }
 
-    protected static function getNavigationGroup(): ?string
-    {
-        return Utils::isResourceNavigationGroupEnabled()
-            ? __('filament-shield::filament-shield.nav.group')
-            : '';
-    }
 
-    protected static function getNavigationLabel(): string
-    {
-        return __('filament-shield::filament-shield.nav.role.label');
-    }
 
-//    protected static function getNavigationIcon(): string
-//    {
-//        return __('filament-shield::filament-shield.nav.role.icon');
-//    }
+
+    protected static ?string $navigationGroup = 'Profile & Users';
+    protected static ?string $navigationLabel = 'Roles';
+
+
 
     protected static function getNavigationSort(): ?int
     {
