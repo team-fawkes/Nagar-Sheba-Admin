@@ -153,6 +153,8 @@
       <path value="$PROJECT_DIR$/vendor/geocoder-php/google-maps-provider" />
       <path value="$PROJECT_DIR$/vendor/willdurand/geocoder" />
       <path value="$PROJECT_DIR$/vendor/spatie/guzzle-rate-limiter-middleware" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/vendor/bezhansalleh/filament-shield" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

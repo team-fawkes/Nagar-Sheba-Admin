@@ -45,6 +45,7 @@ class AdminResource extends Resource
                         $user = Admin::find($form->getColumns());
                         return $user ? $user->password : null;
                     })->visibleOn('create')->required(),
+                Forms\Components\Select::make('roles')->relationship('roles','name')->multiple()
             ]);
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChatMessageController;
+use App\Http\Controllers\ChatRoomController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +46,16 @@ Route::get('optimize', function (){
 
 });
 
+
+// Route for displaying the list of chat rooms
+Route::get('/chat', [ChatRoomController::class, 'index'])->name('chat.index');
+// Route for creating a new chat room
+Route::post('/chat/rooms', [ChatRoomController::class, 'store'])->name('chat.create');
+// Route for displaying a specific chat room and its messages
+Route::get('/chat/{chatRoom}', [ChatRoomController::class, 'show'])->name('chat.show');
+// Route for storing a new chat message
+Route::post('/chat/messages/send', [ChatMessageController::class, 'store'])->name('chat.message.send');
+// Route for showing  chat message
+Route::get('/chat/{chatRoomId}/messages', [ChatMessageController::class, 'getMessagesForChatRoom'])->name('chat.messages');
 
 
