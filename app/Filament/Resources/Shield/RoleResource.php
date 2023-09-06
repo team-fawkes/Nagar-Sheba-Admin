@@ -213,10 +213,10 @@ class RoleResource extends Resource implements HasShieldPermissions
         return __('filament-shield::filament-shield.nav.role.label');
     }
 
-    protected static function getNavigationIcon(): string
-    {
-        return __('filament-shield::filament-shield.nav.role.icon');
-    }
+//    protected static function getNavigationIcon(): string
+//    {
+//        return __('filament-shield::filament-shield.nav.role.icon');
+//    }
 
     protected static function getNavigationSort(): ?int
     {
