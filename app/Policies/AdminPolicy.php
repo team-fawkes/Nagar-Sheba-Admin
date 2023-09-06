@@ -29,7 +29,8 @@ class AdminPolicy
      */
     public function view(Admin $admin): bool
     {
-        return $admin->can('view_admin');
+        //return $admin->can('view_admin');
+        return true;
     }
 
     /**
@@ -40,7 +41,8 @@ class AdminPolicy
      */
     public function create(Admin $admin): bool
     {
-        return $admin->can('create_admin');
+       // return $admin->can('create_admin');
+        return true;
     }
 
     /**
@@ -51,7 +53,8 @@ class AdminPolicy
      */
     public function update(Admin $admin): bool
     {
-        return $admin->can('update_admin');
+        //return $admin->can('update_admin');
+        return true;
     }
 
     /**
