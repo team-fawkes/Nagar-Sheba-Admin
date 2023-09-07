@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ChatMessageController;
-use App\Http\Controllers\ChatRoomController;
+
+
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -49,9 +49,9 @@ Route::get('optimize', function (){
 
 
 
-Route::get('user/{user_id}/room/{chat_room_id}',[ChatRoomController::class,'inbox']);
-Route::post('/send-message', [ChatRoomController::class,'send_message'])->name('send.message');
-Route::get('/room/{id}/messages', [ChatRoomController::class,'get_messages'])->name('get.messages');
-Route::get('chat/{record}',[ChatRoomController::class,'admin_chat'])->name('admin_complain_chat');
-Route::get('chat/room/{record}',[ChatRoomController::class,'admin_inbox'])->middleware('auth')->name('admin_chat');
+Route::get('user/{user_id}/room/{chat_room_id}',[\App\Http\Controllers\ChatRoomController::class,'inbox']);
+Route::post('/send-message', [\App\Http\Controllers\ChatRoomController::class,'send_message'])->name('send.message');
+Route::get('/room/{id}/messages', [\App\Http\Controllers\ChatRoomController::class,'get_messages'])->name('get.messages');
+Route::get('chat/{record}',[\App\Http\Controllers\ChatRoomController::class,'admin_chat'])->name('admin_complain_chat');
+Route::get('chat/room/{record}',[\App\Http\Controllers\ChatRoomController::class,'admin_inbox'])->middleware('auth')->name('admin_chat');
 
