@@ -27,6 +27,7 @@ class Complain extends Model
         'received_at',
         'solved_at',
         'observed_at',
+        'chat_room_id',
     ];
 
     protected $dates = ['received_at', 'solved_at', 'observed_at'];
@@ -57,5 +58,9 @@ class Complain extends Model
     public function files()
     {
         return $this->hasMany(ComplainFile::class);
+    }
+    public function chat_room(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(ChatRoom::class);
     }
 }

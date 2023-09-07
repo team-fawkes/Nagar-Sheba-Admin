@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -61,6 +62,9 @@ class ComplainResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Action::make('chat')
+                    ->label('Chat')
+                    ->url(fn (Complain $record): string => route('admin_complain_chat', $record)),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

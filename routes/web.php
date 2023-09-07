@@ -48,15 +48,10 @@ Route::get('optimize', function (){
 });
 
 
-// Route for displaying the list of chat rooms
-Route::get('/chat', [ChatRoomController::class, 'index'])->name('chat.index');
-// Route for creating a new chat room
-Route::post('/chat/rooms', [ChatRoomController::class, 'store'])->name('chat.create');
-// Route for displaying a specific chat room and its messages
-Route::get('/chat/{chatRoom}', [ChatRoomController::class, 'show'])->name('chat.show');
-// Route for storing a new chat message
-Route::post('/chat/messages/send', [ChatMessageController::class, 'store'])->name('chat.message.send');
-// Route for showing  chat message
-Route::get('/chat/{chatRoomId}/messages', [ChatMessageController::class, 'getMessagesForChatRoom'])->name('chat.messages');
 
+Route::get('user/{user_id}/room/{chat_room_id}',[ChatRoomController::class,'inbox']);
+Route::post('/send-message', [ChatRoomController::class,'send_message'])->name('send.message');
+Route::get('/room/{id}/messages', [ChatRoomController::class,'get_messages'])->name('get.messages');
+Route::get('chat/{record}',[ChatRoomController::class,'admin_chat'])->name('admin_complain_chat');
+Route::get('chat/room/{record}',[ChatRoomController::class,'admin_inbox'])->middleware('auth')->name('admin_chat');
 

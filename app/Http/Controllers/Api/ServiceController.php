@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChatMessage;
+use App\Models\ChatRoom;
 use App\Models\Complain;
 use App\Models\ServiceCategory;
 use App\Models\User;
+use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -91,7 +94,10 @@ class ServiceController extends Controller
                     'status' => false,
                 ], 422);
             }
-
+            $chat_room = new ChatRoom([
+                'name'=>$request->input('title'),
+            ]);
+            $chat_room->save();
             $complain = new Complain([
                 'service_category_id' => intval($request->input('service_category_id')) ,
                 'user_id' => $this->guard()->user()->id,
@@ -103,14 +109,25 @@ class ServiceController extends Controller
                 'voice' => $this->storeFile($request->file('voice'), 'complain/voices'),
                 'video' => $this->storeFile($request->file('video'), 'complain/videos'),
                 'gallery' => $request->file('gallery') ? $this->storeGalleryFiles($request->file('gallery')) : null,
-
+                'chat_room_id'=>$chat_room->id,
             ]);
 
             $complain->save();
+            $message = 'Titile : '.$complain->titile.'<br>';
+            $message = $message.'Category : '.$complain->service_category->title_en.'('.$complain->service_category->title_en.')<br>';
+            $message = $message.'Description : '.$complain->description.'<br>';
+            $message = $message.'<img src="'.asset('uploads/'.$complain->picture).'" class="img-fluid msg-img">';
+            ChatMessage::create([
+                'chat_room_id' => $chat_room->id,
+                'sender_id' => $this->guard()->user()->id,
+                'sender' => 'user',
+                'message' => $message,
+            ]);
 
             return response()->json([
                 'message' => 'Complain created successfully',
                 'complain' => $complain,
+                'chat_room' => $complain->chat_room,
                 'status' => true,
             ], 201);
         }
@@ -124,6 +141,7 @@ class ServiceController extends Controller
             $complains = Complain::where('user_id',$this->guard()->user()->id)->get();
             foreach ($complains as $complain){
                 $complain->service_category;
+                $complain->chat_room;
             }
             return response()->json([
                 'status' => true,
@@ -139,6 +157,7 @@ class ServiceController extends Controller
         if ($this->guard()->user()){
             $complain = Complain::find($id);
             $complain->service_category;
+            $complain->chat_room;
             return response()->json([
                 'status' => true,
                 'complain' => $complain,

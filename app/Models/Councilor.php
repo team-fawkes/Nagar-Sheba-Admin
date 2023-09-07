@@ -22,11 +22,13 @@ class Councilor extends Model
         'image',
         'phone',
 
+
     ];
 
     public function ward(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Ward::class);
     }
+
 
 }

@@ -30,9 +30,6 @@ class Admin extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function chatRooms()
-    {
-        return $this->belongsToMany(ChatRoom::class, 'admin_chat_room');
-    }
+
 
 }
