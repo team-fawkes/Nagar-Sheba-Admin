@@ -32,7 +32,7 @@ class ChatRoomController extends Controller
                 'sender' => 'user',
                 'message' => $message,
             ]);
-            return redirect(route('admin_chat',['chat_room_id'=>$room->id]));
+            return redirect(route('admin_chat',['record'=>$room->id]));
         }
 
     }
