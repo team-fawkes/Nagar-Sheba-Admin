@@ -28,7 +28,7 @@ class ChatRoomController extends Controller
             $message = $message.'<img src="'.asset('uploads/'.$complain->picture).'" class="img-fluid msg-img">';
             ChatMessage::create([
                 'chat_room_id' => $room->id,
-                'sender_id' => $complain->user->id,
+                'sender_id' => $complain->user_id,
                 'sender' => 'user',
                 'message' => $message,
             ]);
