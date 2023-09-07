@@ -54,6 +54,7 @@ class ChatRoomResource extends Resource
                     ->url(fn (ChatRoom $record): string => route('admin_chat', $record)),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

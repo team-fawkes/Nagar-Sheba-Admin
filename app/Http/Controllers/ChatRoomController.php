@@ -86,11 +86,11 @@ class ChatRoomController extends Controller
             if ($message->sender == 'user') {
                 $sender = User::find($message->sender_id);
                 $messageInfo['sender'] = 'user';
-                $messageInfo['name'] = $sender->name; // Change this to the actual user name field
+                $messageInfo['name'] = $sender->name??'User'; // Change this to the actual user name field
             } else {
                 $sender = Admin::find($message->sender_id);
                 $messageInfo['sender'] = 'admin';
-                $messageInfo['name'] = $sender->name; // Change this to the actual admin name field
+                $messageInfo['name'] = $sender->name??'Admin'; // Change this to the actual admin name field
             }
 
             $messageInfo['message'] = $message->message;
