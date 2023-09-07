@@ -16,7 +16,23 @@ class ChatRoomController extends Controller
         if ($complain->chat_room){
             return redirect(route('admin_chat',['chat_room_id'=>$complain->chat_room->id]));
         }else{
-            return redirect()->back();
+            $room = new ChatRoom([
+                'name'=>$complain->title,
+                'status'=>'open',
+            ]);
+
+            $room->save();
+            $message = 'Titile : '.$complain->titile.'<br>';
+            $message = $message.'Category : '.$complain->service_category->title_en.'('.$complain->service_category->title_en.')<br>';
+            $message = $message.'Description : '.$complain->description.'<br>';
+            $message = $message.'<img src="'.asset('uploads/'.$complain->picture).'" class="img-fluid msg-img">';
+            ChatMessage::create([
+                'chat_room_id' => $room->id,
+                'sender_id' => $complain->user->id,
+                'sender' => 'user',
+                'message' => $message,
+            ]);
+            return redirect(route('admin_chat',['chat_room_id'=>$room->id]));
         }
 
     }
