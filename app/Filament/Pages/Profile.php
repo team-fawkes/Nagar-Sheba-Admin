@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
 
@@ -28,6 +29,7 @@ class Profile extends Page
         $this->form->fill([
             'name' => auth()->user()->name,
             'email' => auth()->user()->email,
+
         ]);
     }
     public function submit()
@@ -77,6 +79,7 @@ class Profile extends Page
                     TextInput::make('email')
                         ->label('Email Address')
                         ->required(),
+
                 ]),
             Section::make('Update Password')
                 ->columns(2)
