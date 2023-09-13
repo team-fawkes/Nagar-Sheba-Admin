@@ -27,11 +27,6 @@ class ComplainChart extends BarChartWidget
         $progressData = array_fill_keys($months, 0);
         $solvedData = array_fill_keys($months, 0);
 
-        $pending = 0;
-        $received = 0;
-        $progress = 0;
-        $solved = 0;
-
         // Loop through the complaints and update the counts for each month
         foreach ($complaints as $complaint) {
             $status = $complaint->status;
@@ -39,19 +34,14 @@ class ComplainChart extends BarChartWidget
 
             // Determine the label (e.g., 'Jan', 'Feb', etc.) based on the created_at date
             $label = $createdAt->format('M');
-
             if ($status === 'pending') {
                 $pendingData[$label]++;
-                $pending ++;
             } elseif ($status === 'received') {
                 $receivedData[$label]++;
-                $received ++;
             } elseif ($status === 'progress') {
                 $progressData[$label]++;
-                $progress ++;
             } elseif ($status === 'solved') {
                 $solvedData[$label]++;
-                $solved++;
             }
         }
 
@@ -65,28 +55,28 @@ class ComplainChart extends BarChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => "Pending $pending",
+                    'label' => "Pending",
                     'data' => $pendingData,
                     'backgroundColor' => 'rgba(255,255,0)',
                     'borderColor' => 'rgb(139, 128, 0)',
                     'borderWidth' => 1,
                 ],
                 [
-                    'label' => "Received $received",
+                    'label' => "Received",
                     'data' => $receivedData,
                     'backgroundColor' => 'rgb(255,69,0)',
                     'borderColor' => 'rgba(255, 140,0)',
                     'borderWidth' => 1,
                 ],
                 [
-                    'label' => "Progress $progress",
+                    'label' => "Progress",
                     'data' => $progressData,
                     'backgroundColor' => 'rgba(0,0,255)',
                     'borderColor' => 'rgb(0, 0, 139)',
                     'borderWidth' => 1,
                 ],
                 [
-                    'label' => "Solved $solved",
+                    'label' => "Solved",
                     'data' => $solvedData,
                     'backgroundColor' => 'rgb(0,128,0)',
                     'borderColor' => 'rgb(0,100,0)',
