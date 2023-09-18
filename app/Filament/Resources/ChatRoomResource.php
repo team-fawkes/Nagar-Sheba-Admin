@@ -30,6 +30,10 @@ class ChatRoomResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('status')
                     ->required()->options(['open'=>'Open','closed'=>'Closed']),
+                Forms\Components\DatePicker::make('created_at')->visibleOn('view')
+                    ->format('d M y h:i A'),
+                Forms\Components\DatePicker::make('updated_at')->visibleOn('view')
+                    ->format('d M y h:i A'),
             ]);
     }
 
@@ -37,12 +41,9 @@ class ChatRoomResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('complain.complain_id')->searchable(),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\BadgeColumn::make('status'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('d M y h:i A'),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime('d M y h:i A'),
                 Tables\Columns\TextColumn::make('chat_messages_count')->counts('chat_messages')->label('Msg Count')
             ])
             ->filters([
