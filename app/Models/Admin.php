@@ -19,6 +19,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'service_category_id',
     ];
 
     protected $hidden = [
@@ -29,6 +30,10 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function service_category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(ServiceCategory::class);
+    }
 
 
 
