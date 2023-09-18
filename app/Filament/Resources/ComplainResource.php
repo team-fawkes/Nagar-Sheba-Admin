@@ -30,8 +30,8 @@ class ComplainResource extends Resource
                     ->relationship('service_category', 'title_en')->required(),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')->required(),
-                Forms\Components\TextInput::make('title')->required()->maxLength(255)->label('Problem Title')->columnSpan(2),
-                Forms\Components\Textarea::make('description')->required()->maxLength(65535)->columnSpan(2)->label('Problem Details'),
+                Forms\Components\TextInput::make('title')->required()->maxLength(255)->label('Problem Title'),
+                Forms\Components\Textarea::make('description')->required()->maxLength(65535)->label('Problem Details'),
                 Forms\Components\TextInput::make('latitude'),
                 Forms\Components\TextInput::make('longitude'),
                 Forms\Components\FileUpload::make('picture')->image(),
