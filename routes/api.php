@@ -80,3 +80,8 @@ Route::get('invoice/{invid}',[\App\Http\Controllers\Api\PaymentController::class
 //Meyor API
 Route::get('complain-charts',[\App\Http\Controllers\Chart\ComplainChartController::class,'getLast12MonthsData']);
 Route::get('complain-charts/{id}',[\App\Http\Controllers\Chart\ComplainChartController::class,'getLast12MonthsDataBycategory']);
+Route::get('mayor/bulletins',[\App\Http\Controllers\Admin\BasicController::class,'bulletins']);
+Route::get('mayor/notifications',[\App\Http\Controllers\Admin\BasicController::class,'notifications']);
+Route::get('mayor/notification/{id}',[\App\Http\Controllers\Admin\BasicController::class,'notification']);
+Route::get('mayor/disaster-alerts',[\App\Http\Controllers\Admin\BasicController::class,'disaster_alerts']);
+Route::get('mayor/disaster-alert/{id}',[\App\Http\Controllers\Admin\BasicController::class,'disaster_alert']);
