@@ -79,3 +79,4 @@ Route::get('invoice/{invid}',[\App\Http\Controllers\Api\PaymentController::class
 
 //Meyor API
 Route::get('complain-charts',[\App\Http\Controllers\Chart\ComplainChartController::class,'getLast12MonthsData']);
+Route::get('complain-charts/{id}',[\App\Http\Controllers\Chart\ComplainChartController::class,'getLast12MonthsDataBycategory']);
