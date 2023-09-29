@@ -76,3 +76,6 @@ Route::get('bill/{id}',[\App\Http\Controllers\Api\PaymentController::class,'bill
 Route::post('create-invoice',[\App\Http\Controllers\Api\PaymentController::class,'create_invoice']);
 Route::get('invoices',[\App\Http\Controllers\Api\PaymentController::class,'invoices']);
 Route::get('invoice/{invid}',[\App\Http\Controllers\Api\PaymentController::class,'invoice']);
+
+//Meyor API
+Route::get('complain-charts',[\App\Http\Controllers\Chart\ComplainChartController::class,'getLast12MonthsData']);
